@@ -335,6 +335,7 @@ button:hover {
     //countries
         //country_of_residency
         var country_of_residency = document.querySelector("#country_of_residency");
+        var country_of_residency_value = document.querySelector("#country_of_residency_value");
         window.intlTelInput(country_of_residency, {
             // any initialisation options go here
             // utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
@@ -351,11 +352,12 @@ button:hover {
         let i=0;
         const timer=setInterval(()=>{
         ++i;
-        country_of_residency.setAttribute('value', iti1.getSelectedCountryData().name);
+        country_of_residency_value.setAttribute('value', iti1.getSelectedCountryData().name);
         },100);
     
         //place_of_birth
         var place_of_birth = document.querySelector("#place_of_birth");
+        var place_of_birth_value = document.querySelector("#place_of_birth_value");
         window.intlTelInput(place_of_birth, {
             // any initialisation options go here
             // utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
@@ -372,11 +374,12 @@ button:hover {
         i=0;
         setInterval(()=>{
         ++i;
-        place_of_birth.setAttribute('value', iti2.getSelectedCountryData().name);
+        place_of_birth_value.setAttribute('value', iti2.getSelectedCountryData().name);
         },100);
     
         //place_of_issue
         var place_of_issue = document.querySelector("#place_of_issue");
+        var place_of_issue_value = document.querySelector("#place_of_issue_value");
         window.intlTelInput(place_of_issue, {
             // any initialisation options go here
             // utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
@@ -393,7 +396,7 @@ button:hover {
         i=0;
         setInterval(()=>{
         ++i;
-        place_of_issue.setAttribute('value', iti3.getSelectedCountryData().name);
+        place_of_issue_value.setAttribute('value', iti3.getSelectedCountryData().name);
         },100);
     
     
@@ -401,6 +404,7 @@ button:hover {
         //companion country
         //country_of_residency
         var companion_country_of_residency = document.querySelector("#companion_country_of_residency");
+        var companion_country_of_residency_value = document.querySelector("#companion_country_of_residency_value");
         window.intlTelInput(companion_country_of_residency, {
             // any initialisation options go here
             // utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
@@ -417,11 +421,13 @@ button:hover {
         i=0;
         setInterval(()=>{
         ++i;
-        companion_country_of_residency.setAttribute('value', iti4.getSelectedCountryData().name);
+        companion_country_of_residency_value.setAttribute('value', iti4.getSelectedCountryData().name);
         },100);
     
         //companion_place_of_birth
         var companion_place_of_birth = document.querySelector("#companion_place_of_birth");
+        var companion_place_of_birth_value = document.querySelector("#companion_place_of_birth_value");
+
         window.intlTelInput(companion_place_of_birth, {
             // any initialisation options go here
             // utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
@@ -438,11 +444,13 @@ button:hover {
         i=0;
         setInterval(()=>{
         ++i;
-        companion_place_of_birth.setAttribute('value', iti5.getSelectedCountryData().name);
+        companion_place_of_birth_value.setAttribute('value', iti5.getSelectedCountryData().name);
         },100);
     
         //place_of_issue
         var companion_place_of_issue = document.querySelector("#companion_place_of_issue");
+        var companion_place_of_issue_value = document.querySelector("#companion_place_of_issue_value");
+
         window.intlTelInput(companion_place_of_issue, {
             // any initialisation options go here
             // utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.3/build/js/utils.js",
@@ -459,7 +467,7 @@ button:hover {
         i=0;
         setInterval(()=>{
         ++i;
-        companion_place_of_issue.setAttribute('value', iti6.getSelectedCountryData().name);
+        companion_place_of_issue_value.setAttribute('value', iti6.getSelectedCountryData().name);
         },100);
         //companion_country
     //countries
@@ -470,6 +478,8 @@ button:hover {
 <script>
 
   // -   Passport No and companion_passport_no should have at least 6 character and contains English chars and numbers
+
+    //onkey passport_no
   const passport_no  = document.getElementById('passport_no');
   let pattern_passport_no =/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+){6,}$/; //^[a-zA-Z0-9]{6,}$/
   passport_no.addEventListener('keyup', (e) => {
@@ -483,6 +493,22 @@ button:hover {
       }
       if (e.target.value == '') {
           passport_no.classList.remove('error')
+      }
+  });
+  //onkey OTP_Verification_Number
+  const OTP_Verification_Number  = document.getElementById('OTP_Verification_Number');
+  let pattern_OTP_Verification_Number =/^[0-9]{4}$/; //^[a-zA-Z0-9]{6,}$/
+  OTP_Verification_Number.addEventListener('keyup', (e) => {
+      if (pattern_OTP_Verification_Number.test(e.target.value)) {
+          OTP_Verification_Number.classList.remove('error')
+          OTP_Verification_Number.classList.add('success');
+      } else {
+          OTP_Verification_Number.classList.remove('success')
+          OTP_Verification_Number.classList.add('error');
+          //document.querySelector('.feedback_OTP_Verification_Number').style.display = 'flow-root';
+      }
+      if (e.target.value == '') {
+          OTP_Verification_Number.classList.remove('error')
       }
   });
   const companion_passport_no  = document.getElementById('companion_passport_no');
@@ -689,6 +715,25 @@ button:hover {
               y[i].className += " invalid";
               // and set the current valid status to false
               valid = false;
+          }
+          //stop move in slide form when length of OTP_Verification_Number not equal 4
+          var feedback_OTP_Verification_Number=document.querySelector("#feedback_OTP_Verification_Number");
+          if(OTP_Verification_Number.value.length!=4){
+              valid = false;
+              feedback_OTP_Verification_Number.style.color="red";
+              feedback_OTP_Verification_Number.innerHTML="OTP_Verification_Number length must 4 characters";
+          }else{
+            feedback_OTP_Verification_Number.innerHTML="";
+          }
+          //stop move in slide form when length of passport_no not equal 6 mix chars and number at leat 6
+          var passport_no=document.querySelector("#passport_no");
+          var feedback_passport_no=document.querySelector("#feedback_passport_no");
+          if(passport_no.value.length<6 && currentTab==1){
+              valid = false;
+              feedback_passport_no.style.color="red";
+              feedback_passport_no.innerHTML="passport_no length must 6 mix characters and numbers";
+          }else{
+            feedback_passport_no.innerHTML="";
           }
       }
       // If the valid status is true, mark the step as finished and valid:

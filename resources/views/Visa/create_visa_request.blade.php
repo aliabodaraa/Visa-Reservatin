@@ -1,23 +1,22 @@
 @extends('layouts.app-master')
 
 @section('content')
-        @if ($eamil = Session::get('eamil'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ $eamil }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-    @endif
-<h1>{{ $eamil }}</h1>
+    
+<h1>Welcome  {{  $email }}  !!</h1>
         
         <form id="regForm" method="POST" action="{{ route("visa.store_visa_data") }}">
             @csrf
+            <input type="email" name="email" value="{{ $email }}" hidden />
+            <input type="number" name="id" value="{{ $id }}" hidden />
             <h1>Register:</h1>
             <!-- One "tab" for each step in the form: -->
             <div class="tab">
                 country code and Enter your number:
-                <p><input type="number" id="phone" class="form-group" name="phone" required style="width: 406px"/></p>
+                <p><input type="number" id="phone" class="form-group" name="phone" required style="width: 743px"/></p>
                 OTP Verification Number :
-              <p><input class="form-group" placeholder="OTP Verification Number..." type="number" name="OTP_Verification_Number :" required></p>
+              <p><input class="form-group" placeholder="OTP Verification Number..." type="number" id="OTP_Verification_Number" name="OTP_Verification_Number :" required>
+                <span id="feedback_OTP_Verification_Number"></span>
+            </p>
             </div>
             <div class="tab">
                 {{-- second tab --}}
@@ -44,16 +43,21 @@
                 <br>
                 <p>
                 Place of birth :<br>
-                <select id="place_of_birth" placeholder="Please Place of birth..." style="display: contents;" name="place_of_birth" value=""></select>
+                <select id="place_of_birth" placeholder="Please Place of birth..." style="display: contents;" name="place_of_birth" value="">
+                    <option id="place_of_birth_value" value=""></option>
+                </select>
                 </p>
                 <p>
                 Country of Residency :<br>
-                <select id="country_of_residency" placeholder="Please Country of Residency..." style="display: contents;" name="country_of_residency" value=""></select>
+                <select  id="country_of_residency" placeholder="Please Country of Residency..." style="display: contents;" name="country_of_residency">
+                    <option id="country_of_residency_value" value=""></option>
+                </select>
                 </p>
 
                 Passport No :
                 <p>
                     <input placeholder="Passport No..." type="text" name="passport_no" id="passport_no" required>
+                    <span id="feedback_passport_no"></span>
                     {{-- <span class="feedback_passport_no">The passport_no is incorrect</span> --}}
                 </p>
             	Issue date :
@@ -61,7 +65,9 @@
                 Expiry date :
                 <p><input class="date_picker_start_from_today" onclick="min_date_choose()" placeholder="MM/DD/YYYY" type="date" name="expiry_date" required></p>
                 Place of issue:
-                <p><select id="place_of_issue" placeholder="Please Place of issue..." style="display: contents;" name="place_of_issue" value=""></select></p>
+                <p><select id="place_of_issue" placeholder="Please Place of issue..." style="display: contents;" name="place_of_issue" value="">
+                    <option id="place_of_issue_value" value=""></option>
+                </select></p>
                 Arrival date :
                 <p><input class="date_picker_start_from_today" onclick="min_date_choose()" placeholder="MM/DD/YYYY" type="date" name="arrival_date" required></p>
                 Profession :
@@ -130,7 +136,7 @@
                             <p><input class="date_picker_start_from_before_today" onclick="max_date_choose()" placeholder="MM/DD/YYYY" name="companion_date_of_birth" type="date"/></p>
                             companion Gender Info:
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="Male" name="companion_gender" id="Male" checked>
+                                <input class="form-check-input" type="radio" value="Male" name="companion_gender" id="Male" >
                                 <label class="form-check-label" for="Male">
                                     Male
                                 </label>
@@ -142,9 +148,14 @@
                                 </label>
                             </div>
                             companion Place of birth
-                            <p><select id="companion_place_of_birth" style="display: contents;" name="companion_place_of_birth" value=""></select></p>
+                            <p><select id="companion_place_of_birth" style="display: contents;" name="companion_place_of_birth" value="">
+                                <option id="companion_place_of_birth_value" value=""></option>
+                            
+                            </select></p>
                             companion Country of Residency
-                            <p><select id="companion_country_of_residency" style="display: contents;" name="companion_country_of_residency" value=""></select></p>
+                            <p><select id="companion_country_of_residency" style="display: contents;" name="companion_country_of_residency" value="">
+                                <option id="companion_country_of_residency_value" value=""></option>
+                            </select></p>
                             companion Passport No– احرف وأرقام انجليزي فقط-لايقل عن 6 خانا :
                             <p>
                                 <input placeholder="First name..." type="text" name="companion_passport_no" id="companion_passport_no">
@@ -155,7 +166,9 @@
                             companion Expiry dateلايمكن اختيارتاريخ مستقبلي:
                             <p><input class="date_picker_start_from_today" onclick="min_date_choose()" placeholder="Please Arrival date..."  type="date" name="companion_expiry_date"></p>
                             companion Place of issue:
-                            <p><select id="companion_place_of_issue" placeholder="Please Place of issue..." style="display: contents;" name="companion_place_of_issue" value=""></select></p>
+                            <p><select id="companion_place_of_issue" placeholder="Please Place of issue..." style="display: contents;" name="companion_place_of_issue" value="">
+                                <option id="companion_place_of_issue_value" value=""></option>
+                            </select></p>
                             companion Arrival date : لايمكن اختيارتاريخ مضى
                             <p><input class="date_picker_start_from_today" onclick="min_date_choose()" placeholder="MM/DD/YYYY" type="date" name="companion_arrival_date"></p>
                             companion Profession :
@@ -172,7 +185,7 @@
                             <br>
                             companion_Visa status  :
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="single" name="companion_visa_status" id="companion_visa_status_single" checked>
+                                <input class="form-check-input" type="radio" value="single" name="companion_visa_status" id="companion_visa_status_single" >
                                 <label class="form-check-label" for="single">
                                     single
                                 </label>
@@ -238,7 +251,7 @@
                     <div class="card card-body">
                         Rom Extra type :
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" value="king_bed" name="rom_extra_type" id="rom_type_extra_king_bed" checked>
+                            <input class="form-check-input" type="radio" value="king_bed" name="rom_extra_type" id="rom_type_extra_king_bed">
                             <label class="form-check-label" for="king_bed">
                                 king bed 
                             </label>

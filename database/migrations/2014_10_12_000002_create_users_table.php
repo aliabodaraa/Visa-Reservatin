@@ -19,11 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('studing_year');
-            $table->integer('num_new_lectures_not_shown')->default(0);
-            $table->integer('num_new_posts_not_shown')->default(0);
-            $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
