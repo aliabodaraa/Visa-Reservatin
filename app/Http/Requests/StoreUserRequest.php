@@ -24,9 +24,8 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns|unique:users,email',
+            'email' => 'required|unique:users,email',/*email:rfc,dns|unique:users*/
             'username' => 'required|unique:users,username',
-            'department_id' => 'required',
         ];
     }
 }

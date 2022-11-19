@@ -29,8 +29,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'email' => 'required|unique:users,email,'.$user->id,
             'username' => 'required|unique:users,username,'.$user->id,
-            'department_id' => 'required',//without  it i cant make any change on it
-            'studing_year' => 'required',//without  it i cant make any change on it
         ];
     }
 }

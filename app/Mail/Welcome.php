@@ -30,6 +30,6 @@ class Welcome extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.welcome')->with(['email'=>$this->data['email' ],'id'=>$this->data['id']]);
+        return $this->markdown('mail.welcome')->with(['data' => $this->data]);
     }
 }

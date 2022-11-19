@@ -4,7 +4,7 @@
     
 <h1>Welcome  {{  $email }}  !!</h1>
         
-        <form id="regForm" method="POST" action="{{ route("visa.store_visa_data") }}">
+        <form id="regForm" method="POST" action="{{ route("guests.store_visa_info",$id) }}">
             @csrf
             <input type="email" name="email" value="{{ $email }}" hidden />
             <input type="number" name="id" value="{{ $id }}" hidden />
@@ -21,9 +21,10 @@
             <div class="tab">
                 {{-- second tab --}}
                 Name :
-                <p><input placeholder="First name..." name="fname" required style="margin-bottom: 2px">
-                    <input placeholder="Last name..." name="lname" required></p>
-
+                <p><input  name="fname"  value="{{ $first_name }}" disabled style="margin-bottom: 2px">
+                    <input name="lname"  value="{{ $last_name }}" disabled></p>
+                    Email :
+                    <p><input name="email" value="{{ $email }}" disabled style="margin-bottom: 2px"></p>
                 Date of birth :
                 <p><input class="date_picker_start_from_before_today" onclick="max_date_choose()" placeholder="MM/DD/YYYY" name="date_of_birth" type="date" required/></p>
                 Gender Info :
@@ -128,6 +129,7 @@
                     <div class="collapse" id="companion_collapse">
                         <div class="card card-body companion_card">
                             {{--Companion_fields--}}
+                            <input type="number" name="guest_id" value="{{ $id }}" hidden />
                             companion Name:
                             <p><input placeholder="companion First name..." name="companion_fname"></p>
                             <p><input placeholder="companion Last name..." name="companion_lname"></p>
