@@ -12,7 +12,7 @@
             <!-- One "tab" for each step in the form: -->
             <div class="tab">
                 country code and Enter your number:
-                <p><input type="number" id="phone" class="form-group" name="phone" required style="width: 743px"/></p>
+              <p><input type="number" id="phone" class="form-group" name="phone" required/></p>
                 OTP Verification Number :
               <p><input class="form-group" placeholder="OTP Verification Number..." type="number" id="OTP_Verification_Number" name="OTP_Verification_Number :" required>
                 <span id="feedback_OTP_Verification_Number"></span>

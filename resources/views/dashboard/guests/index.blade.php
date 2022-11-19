@@ -5,7 +5,7 @@
     <div class="bg-light p-4 rounded">
         <div class="lead">
             @if($person_type=="invitee")
-                <a href="{{ route('dashboard.users.send_invite',auth()->user()->id) }}" class="btn btn-warning float-right mb-4">إضافة دعوة</a>
+                <a href="{{ route('dashboard.users.send_invite',auth()->user()->id) }}" class="btn btn-secondary float-right mb-4">إضافة دعوة</a>
             @endif
         </div>
         @if ($message = Session::get('message'))
@@ -29,7 +29,7 @@
             <input class="form-control" 
             type="text" 
             id="search_guest_name" 
-            onkeyup="myFunction(JSON.stringify({{ App\Models\Guest::all() }}))" placeholder="Serarch Guests">
+            onkeyup="guestsSearchFunction(JSON.stringify({{ App\Models\Guest::all() }}))" placeholder="Serarch Guests">
         </div>
 
             @if($person_type=="invitee")
@@ -43,6 +43,7 @@
                         </tr>
                         </thead>
                         <tbody id="guest-list" name="guests-list">
+                            <tr id="empty_guests" style="display:none;"><td colspan="4" style="text-align: center;"><b style="color:red;">No invitees</b></td></tr>
                                 @foreach($invitees as $invitee)
                                     <tr class="guest invitee" id="{{$invitee->id}}">
                                         <th scope="row">{{ $invitee->id }}</th>
@@ -65,6 +66,8 @@
                         </tr>
                         </thead>
                         <tbody id="guest-list" name="guests-list">
+                            <tr id="empty_guests" style="display:none;">
+                                <td colspan="5" style="text-align: center;"><b style="color:red;">No registants</b></td></tr>
                                 @foreach($registants as $registant)
                                     <tr class="guest registant" id="{{$registant->id}}">
                                         <th scope="row">{{ $registant->id }}</th>
@@ -73,7 +76,9 @@
                                         <td>{{ $registant->lname }}</td>
                                         <td>
                                             @if($registant->companion)
-                                            <a href="{{ route('dashboard.companion.show',[$registant->id,$registant->companion->id] ) }}" class="btn btn-info btn-sm me-2">companion info</a>
+                                            <a href="{{ route('dashboard.companion.show',[$registant->id,$registant->companion->id] ) }}" class="btn btn-warning btn-sm me-2">companion info</a>
+                                            @else
+                                            <span style="margin-left: 54px;">-</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -94,23 +99,4 @@
 
     </div>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-
-//Filtering Start
-    myFunction=(x)=>{
-    let guests=JSON.parse(x);
-
-    $(".guest").hide();
-    jQuery.each(guests, function(id) {
-        if (guests[id]["fname"].indexOf($('#search_guest_name').val()) > -1 || guests[id]["lname"].indexOf($('#search_guest_name').val()) > -1 )
-            $("#"+guests[id]["id"]).show();
-    });
-    }
-//Filtering End
-    });
-
-    </script>

@@ -11,6 +11,17 @@ h1 {
     text-align: center;
 }
 
+.iti--allow-dropdown {
+    /* for #phone */
+    background-color: red;
+    width: 100%;
+}
+
+input:disabled {
+    color: darkgrey;
+    background-color: #eaeaeafc;
+}
+
 input {
     padding: 10px;
     width: 100%;

@@ -4,7 +4,7 @@
 
     <div class="bg-light p-4 rounded">
         <div class="lead">
-                <a href="{{ route('dashboard.users.create') }}" class="btn btn-warning float-right mb-4"> Add Admin</a>
+                <a href="{{ route('dashboard.users.create') }}" class="btn btn-secondary float-right mb-4"> Add Admin</a>
         </div>
         @if ($message = Session::get('message'))
         <div class="alert alert-success alert-block">
@@ -22,7 +22,7 @@
             <input class="form-control" 
             type="text" 
             id="search_user_name" 
-            onkeyup="myFunction(JSON.stringify({{ App\Models\User::all() }}))" placeholder="Serarch Users">
+            onkeyup="usersSearchFunction(JSON.stringify({{ App\Models\User::all() }}))" placeholder="Serarch Users">
         </div>
         <table class="table table-warning">
             <thead>
@@ -34,12 +34,13 @@
             </tr>
             </thead>
             <tbody id="user-list" name="users-list">
+                <tr id="empty_users" style="display:none">
+                    <td colspan="4" style="text-align: center;"><b style="color:red;">No Users</b></td></tr>
                     @foreach($users as $user)
                         <tr class="{{Auth::user()->id==$user->id? 'text-primary':''}} user" id="{{$user->id}}">
                             <th scope="row">{{ $user->id }}</th>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->username }}</td>
- 
                             <td style="display:flex;align-items:baseline;">
                                 <a href="{{ route('dashboard.users.profile', $user->id) }}" class="btn btn-primary btn-sm me-2">profile</a>
 
@@ -67,22 +68,3 @@
 
     </div>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
-//Filtering Start
-    myFunction=(x)=>{
-    let users=JSON.parse(x);
-    $(".user").hide();
-    jQuery.each(users, function(id) {
-        if (users[id]["username"].indexOf($('#search_user_name').val()) > -1 )
-            $("#"+users[id]["id"]).show();
-    });
-    }
-//Filtering End
-    });
-
-    </script>

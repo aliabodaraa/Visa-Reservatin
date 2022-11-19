@@ -16,10 +16,6 @@
       a{
         text-decoration: none;
       }
-        /* @media (min-width: 1400px){
-        .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-            max-width: 1581px;
-        }} */
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -30,16 +26,34 @@
     .Active{
         border-radius: 5px;
         color: black;
-        background-color:#004871;
+        background-color:#6c757d;
+        border-color: #6c757d;
     }
     body > header > div > div > ul > li:hover{
         border-radius: 5px;
         color: black;
         background-color: #ffffff2b;
     }
+    ul.nav>li{
+        margin-left: 3px;
+        }
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
+        }
+        #logout{
+            position: relative;
+            left: 30%;
+        }
+      }
+      @media (max-width: 768px) {
+       ul.nav>li{
+        height: 38px;
+        font-size: 12px;
+        }
+        #logout{
+            position: relative;
+            left: 14%;
         }
       }
 
@@ -65,21 +79,28 @@
     <main class="container mt-5">
         @yield('content')
     </main>
-    <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>
+
 
     @section("scripts")
-
+    <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>{{-- for use js in bootstrap like collapse --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script>{{-- for use jQuery --}}
     {{-- the next sourses get all countries wappered in select then you can access them  via window.intlTelInput(element,..) --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>{{-- css for countries --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>{{-- get all countries in the world --}}
     {{-- the previous sourses get all countries wappered in select then you can access them  via window.intlTelInput(element,..) --}}
 
     <script src="{!! url('assets/js/countriesApi.js') !!}"></script>
+
+    <script src="{!! url('assets/js/searchFiltering.js') !!}"></script>
     <script src="{!! url('assets/js/clickKeyupEvents.js') !!}"></script>
+
     <script src="{!! url('assets/js/datesTimesConstrants.js') !!}"></script>
     <script src="{!! url('assets/js/form.js') !!}"></script>
+
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"> </script> --}}
+    
 
     @show
   </body>
