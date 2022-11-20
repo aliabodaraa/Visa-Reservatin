@@ -16,4 +16,13 @@ class Guest extends Model
     public function companion(){
         return $this->hasOne(Companion::class);
     }
+    //protected $appends = ['passport_picture','personal_picture'];
+    // public function getPassportPictureAttribute()
+    // {
+    //     return '/images/passport-pictures/'.$this->passport_picture;
+    // }
+    // public function getPersonalPictureAttribute()
+    // {
+    //     return '/images/personal-pictures/'.$this->passport_picture;
+    // }
 }

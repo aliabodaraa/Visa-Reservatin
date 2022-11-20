@@ -4,7 +4,9 @@
     
 <h1>Welcome  {{  $email }}  !!</h1>
         
-        <form id="regForm" method="POST" action="{{ route("guests.store_visa_info",$id) }}">
+        <form id="regForm" method="POST" action="{{ route("guests.store_visa_info",$id) }}"
+         enctype="multipart/form-data"
+         >
             @csrf
             <input type="email" name="email" value="{{ $email }}" hidden />
             <input type="number" name="id" value="{{ $id }}" hidden />
@@ -158,20 +160,20 @@
                             <p><select id="companion_country_of_residency" style="display: contents;" name="companion_country_of_residency" value="">
                                 <option id="companion_country_of_residency_value" value=""></option>
                             </select></p>
-                            companion Passport No– احرف وأرقام انجليزي فقط-لايقل عن 6 خانا :
+                            companion Passport No– :
                             <p>
                                 <input placeholder="First name..." type="text" name="companion_passport_no" id="companion_passport_no">
                                 {{-- <span class="feedback_companion_passport_no">The passport_no is incorrect</span> --}}
                             </p>
-                            companion Issue date لايمكن اختيارتاريخ مستقبلي:
+                            companion Issue date :
                             <p><input class="date_picker_start_from_before_today" onclick="max_date_choose()" placeholder="MM/DD/YYYY" type="date" name="companion_issue_date"/></p>
-                            companion Expiry dateلايمكن اختيارتاريخ مستقبلي:
+                            companion Expiry date :
                             <p><input class="date_picker_start_from_today" onclick="min_date_choose()" placeholder="Please Arrival date..."  type="date" name="companion_expiry_date"></p>
                             companion Place of issue:
                             <p><select id="companion_place_of_issue" placeholder="Please Place of issue..." style="display: contents;" name="companion_place_of_issue" value="">
                                 <option id="companion_place_of_issue_value" value=""></option>
                             </select></p>
-                            companion Arrival date : لايمكن اختيارتاريخ مضى
+                            companion Arrival date :
                             <p><input class="date_picker_start_from_today" onclick="min_date_choose()" placeholder="MM/DD/YYYY" type="date" name="companion_arrival_date"></p>
                             companion Profession :
                             <p><input placeholder="companion Profession..." type="text" name="companion_profession"></p>
@@ -204,14 +206,14 @@
                             <input
                             type="file"
                             name="companion_passport_picture"
-                            id="img1"
+                            id="img3"
                             class="form-control @error('passport_picture') is-invalid @enderror">
                             <br>
                             select your companion Personal picture :
                             <input
                             type="file"
                             name="companion_personal_picture"
-                            id="img2"
+                            id="img4"
                             class="form-control @error('personal_picture') is-invalid @enderror">
 
                             {{--Companion_fields--}}

@@ -55,25 +55,64 @@
                         </tbody>
                     </table>
             @elseif($person_type=="registant")
-                    <table class="table table-warning">
+            <div style="overflow-x:auto;">
+                    <table id="registants_table" class="table table-warning">
                         <thead>
                         <tr>
-                            <th scope="col" width="4%">#</th>
-                            <th scope="col" width="25%">Email</th>
-                            <th scope="col" width="25%">fname</th>
-                            <th scope="col" width="25%">lname</th>
-                            <th scope="col" width="50%">companion</th>
+                            <th scope="col" width="1%">#</th>
+                            <th scope="col" width="1%">Email</th>
+                            <th scope="col" width="1%">fname</th>
+                            <th scope="col" width="1%">lname</th>
+                            <th scope="col" width="1%">phone</th>
+                            <th scope="col" width="1%">gender</th>
+                            <th scope="col" width="1%">place_of_birth</th>
+                            <th scope="col" width="1%">country_of_residency</th>
+                            <th scope="col" width="1%">place_of_issue</th>
+                            <th scope="col" width="1%">passport_no</th>
+                            <th scope="col" width="1%">issue_date</th>
+                            <th scope="col" width="1%">expiry_date</th>
+                            <th scope="col" width="1%">arrival_date</th>
+                            <th scope="col" width="1%">profession</th>
+                            <th scope="col" width="1%">organization</th>
+                            <th scope="col" width="1%">visa_duration</th>
+                            <th scope="col" width="1%">visa_status</th>
+                            <th scope="col" width="1%">passport_picture</th>
+                            <th scope="col" width="1%">personal_picture</th>
+                            <th scope="col" width="1%">check_in_date</th>
+                            <th scope="col" width="1%">check_out_date</th>
+                            <th scope="col" width="1%">rom_type</th>
+                            <th scope="col" width="1%">rom_extra_type</th>
+                            <th scope="col" width="1%">companion</th>
                         </tr>
                         </thead>
                         <tbody id="guest-list" name="guests-list">
                             <tr id="empty_guests" style="display:none;">
-                                <td colspan="5" style="text-align: center;"><b style="color:red;">No registants</b></td></tr>
+                                <td colspan="24" style="text-align: center;"><b style="color:red;">No registants</b></td></tr>
                                 @foreach($registants as $registant)
                                     <tr class="guest registant" id="{{$registant->id}}">
                                         <th scope="row">{{ $registant->id }}</th>
                                         <td>{{ $registant->email }}</td>
                                         <td>{{ $registant->fname }}</td>
                                         <td>{{ $registant->lname }}</td>
+                                        <td>{{ $registant->phone }}</td>
+                                        <td>{{ $registant->gender }}</td>
+                                        <td>{{ $registant->place_of_birth }}</td>
+                                        <td>{{ $registant->country_of_residency }}</td>
+                                        <td>{{ $registant->place_of_issue }}</td>
+                                        <td>{{ $registant->passport_no }}</td>
+                                        <td>{{ $registant->issue_date }}</td>
+                                        <td>{{ $registant->expiry_date }}</td>
+                                        <td>{{ $registant->arrival_date }}</td>
+                                        <td>{{ $registant->profession? $registant->profession:"NN" }}</td>
+                                        <td>{{ $registant->organization ? $registant->organization:"NN" }}</td>
+                                        <td>{{ $registant->visa_duration }}</td>
+                                        <td>{{ $registant->visa_status }}</td>
+                                        <td><img src="{{ asset('/images/passport-pictures/'.$registant->passport_picture) }}"/></td>
+                                        <td><img src="{{ asset('/images/personal-pictures/'.$registant->personal_picture) }}"/></td>
+                                        <td>{{ $registant->check_in_date }}</td>
+                                        <td>{{ $registant->check_out_date }}</td>
+                                        <td>{{ $registant->rom_type? $registant->rom_type:"NN" }}</td>
+                                        <td>{{ $registant->rom_extra_type? $registant->rom_extra_type:"NN" }}</td>
                                         <td>
                                             @if($registant->companion)
                                             <a href="{{ route('dashboard.companion.show',[$registant->id,$registant->companion->id] ) }}" class="btn btn-warning btn-sm me-2">companion info</a>
@@ -85,6 +124,7 @@
                                 @endforeach
                         </tbody>
                     </table>
+                </div>
             @endif
         @else
         <div class="mt-5 alert text-black alert-success" role="alert" style="margin-top: 20px;">

@@ -1,0 +1,9 @@
+    #registants_table img,
+    #companions_table img {
+        height: 129px;
+        width: 249px;
+    }
+    
+    .table>:not(caption)>*>* {
+        text-align: center;
+    }

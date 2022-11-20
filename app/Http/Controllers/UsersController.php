@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateUserRequest;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Welcome;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;use Illuminate\Http\File;
 class UsersController extends Controller
 {
     /**
